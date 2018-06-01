@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ScanLayout">
+        <attr name="timecount" format="integer"/>
+        <attr name="scanDirection" format="integer">
+            <enum name="left2right" value="0"/>
+            <enum name="top2bottom" value="1"/>
+            <enum name="right2left" value="2"/>
+            <!--<enum name="bottom2top" value="3"/>-->
+        </attr>
+        <attr name="bgColor" format="color"/>
+        <attr name="borderColor" format="color"/>
+    </declare-styleable>
+</resources>

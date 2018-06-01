@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <com.sunstar.scanlayout.ScanLayout
+        android:layout_width="match_parent"
+        app:scanDirection="top2bottom"
+        app:timecount="1"
+        app:borderColor="#2AA7F6"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/id_car_border"
+            android:layout_gravity="center"/>
+    </com.sunstar.scanlayout.ScanLayout>
+
+</android.support.constraint.ConstraintLayout>
