@@ -24,13 +24,16 @@ import android.widget.FrameLayout;
  */
 public class ScanLayout extends FrameLayout {
 
+    public static final int  ALWAYS = 4;
+    public static final int  MANUAL = 5;
     View childView;
     float childTop, childLeft, childWidth, childHeight, childBottom, childRight;
     Paint linePaint, bgPaint,vPaint,hPaint,scanSqurePaint;
-    private int bgColor, borderColor, timeSecond, scanDirection, timeCont;
+    private int bgColor, borderColor, timeSecond, scanDirection, scanMode,timeCont;
     private float distancePreSecond;
     private Handler handler = new Handler();
     private boolean isStart = true;
+    private boolean shouldScanning;
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
@@ -88,6 +91,12 @@ public class ScanLayout extends FrameLayout {
         borderColor = typedArray.getColor(R.styleable.ScanLayout_borderColor, Color.GREEN);
         timeSecond = typedArray.getInt(R.styleable.ScanLayout_timecount, 1);
         scanDirection = typedArray.getInteger(R.styleable.ScanLayout_scanDirection, 1);
+        scanMode = typedArray.getInteger(R.styleable.ScanLayout_scan_mode, 1);
+        if(scanMode == ALWAYS){
+            shouldScanning = true;
+        } else {
+            shouldScanning = false;
+        }
         typedArray.recycle();
     }
 
@@ -127,6 +136,7 @@ public class ScanLayout extends FrameLayout {
 
     @Override
     protected boolean drawChild(Canvas canvas, View child, long drawingTime) {
+
         if(childHeight == 0){
             childTop = child.getTop();
             childLeft = child.getLeft();
@@ -136,9 +146,13 @@ public class ScanLayout extends FrameLayout {
             childHeight = child.getHeight();
             initDistance();
         }
+
         Path myPath = new Path();
         initBgPath(myPath,child);
         canvas.drawPath(myPath, bgPaint);
+        if(scanMode != ALWAYS && !shouldScanning){
+            return super.drawChild(canvas, child, drawingTime);
+        }
         switch (scanDirection) {
             case 0:
                 canvas.drawLine(childLeft, childTop, childLeft, childBottom, linePaint);
@@ -190,6 +204,21 @@ public class ScanLayout extends FrameLayout {
         }
         handler.postDelayed(runnable, 10);
         return super.drawChild(canvas, child, drawingTime);
+    }
+
+    public void startScan(){
+        if(!shouldScanning && scanMode == MANUAL){
+            shouldScanning = true;
+            handler.postDelayed(runnable, 10);
+        }
+    }
+
+    public void stopScan(){
+        if(shouldScanning && scanMode == MANUAL){
+            shouldScanning = false;
+            invalidate();
+            handler.removeCallbacksAndMessages(null);
+        }
     }
 
     private void initDistance() {
