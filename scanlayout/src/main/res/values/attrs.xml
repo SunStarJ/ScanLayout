@@ -10,5 +10,9 @@
         </attr>
         <attr name="bgColor" format="color"/>
         <attr name="borderColor" format="color"/>
+        <attr name="scan_mode" format="enum">
+            <enum name="always" value="4"/>
+            <enum name="manual" value="5"/>
+        </attr>
     </declare-styleable>
 </resources>

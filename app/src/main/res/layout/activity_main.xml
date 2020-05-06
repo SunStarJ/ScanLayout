@@ -7,16 +7,40 @@
     tools:context=".MainActivity">
 
     <com.sunstar.scanlayout.ScanLayout
+        android:id="@+id/scanLayout"
         android:layout_width="match_parent"
-        app:scanDirection="top2bottom"
-        app:timecount="1"
+        android:layout_height="match_parent"
         app:borderColor="#2AA7F6"
-        android:layout_height="match_parent">
+        app:scanDirection="top2bottom"
+        app:scan_mode="manual"
+        app:timecount="1">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/id_car_border"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:src="@mipmap/id_car_border" />
     </com.sunstar.scanlayout.ScanLayout>
+
+    <Button
+        android:id="@+id/start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="开始"
+        app:layout_constraintEnd_toStartOf="@+id/stop"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="停止"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/start"
+        app:layout_constraintTop_toTopOf="@+id/start" />
+
 
 </android.support.constraint.ConstraintLayout>
